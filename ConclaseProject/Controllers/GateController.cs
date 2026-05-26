@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using ConclaseProject.DTOs;
-using Gatherly.Infrastructure.Services;
+using ConclaseProject.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

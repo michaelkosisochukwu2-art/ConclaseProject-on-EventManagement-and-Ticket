@@ -6,7 +6,7 @@ using ConclaseProject.Interfaces;
 using ConclaseProject.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Gatherly.Infrastructure.Services
+namespace ConclaseProject.Services
 {
     public class VerificationService
     {

@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 using ConclaseProject.DTOs;
 using ConclaseProject.Interfaces;
 using ConclaseProject.Models;
-using ConclaseProject.DTOs;
-using ConclaseProject .Interfaces;
 
-namespace Gatherly.Infrastructure.Services
+
+namespace ConclaseProject.Services
 {
     public class EventService
     {

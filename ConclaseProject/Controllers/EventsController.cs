@@ -2,10 +2,10 @@
 using System;
 using System.Threading.Tasks;
 using ConclaseProject.DTOs;
-using Gatherly.Infrastructure.Services;
+using ConclaseProject.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Gatherly.Api.Controllers
+namespace ConclaseProject.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

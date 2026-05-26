@@ -4,11 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using ConclaseProject.Interfaces;
 using ConclaseProject.Models;
-using ConclaseProject.Interfaces;
 using ConclaseProject. Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Gatherly.Infrastructure.Repositories
+namespace ConclaseProject.Repositories
 {
     public class EventRepository : IEventRepository
     {

@@ -1,7 +1,7 @@
 ﻿using ConclaseProject.Interfaces;
 using ConclaseProject.Data;
-using Gatherly.Infrastructure.Repositories; // 👈 Added to find EventRepository and EventPassRepository
-using Gatherly.Infrastructure.Services;     // 👈 Corrected namespace to find your core services
+using ConclaseProject.Repositories; // 👈 Added to find EventRepository and EventPassRepository
+using ConclaseProject.Services;     // 👈 Corrected namespace to find your core services
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
