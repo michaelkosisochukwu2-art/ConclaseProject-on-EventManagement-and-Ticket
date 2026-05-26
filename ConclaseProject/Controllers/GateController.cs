@@ -1,11 +1,13 @@
 ﻿using System.Threading.Tasks;
 using ConclaseProject.DTOs;
 using ConclaseProject.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConclaseProject.Controllers
 {
+    [Authorize]//locked every end point inside this entire controller
     [Route("api/[controller]")]
     [ApiController]
     public class GateController : ControllerBase

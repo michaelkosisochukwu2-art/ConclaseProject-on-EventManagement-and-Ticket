@@ -22,7 +22,7 @@ namespace ConclaseProject.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Attendees", b =>
+            modelBuilder.Entity("Attendee", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,6 +87,43 @@ namespace ConclaseProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("ConclaseProject.Models.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ConclaseProject.Models.VerificationLog", b =>
@@ -180,7 +217,7 @@ namespace ConclaseProject.Migrations
 
             modelBuilder.Entity("EventPass", b =>
                 {
-                    b.HasOne("Attendees", "Attendee")
+                    b.HasOne("Attendee", "Attendee")
                         .WithMany("EventPasses")
                         .HasForeignKey("AttendeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -197,7 +234,7 @@ namespace ConclaseProject.Migrations
                     b.Navigation("Event");
                 });
 
-            modelBuilder.Entity("Attendees", b =>
+            modelBuilder.Entity("Attendee", b =>
                 {
                     b.Navigation("EventPasses");
                 });

@@ -18,6 +18,32 @@ namespace ConclaseProject.Services
             _eventRepository = eventRepository;
             _passRepository = passRepository;
         }
+        public async Task<bool> UpdateGuestAsync(Guid passId, UpdatedGuestDto dto)
+        {
+            var pass = await _passRepository.GetByIdWithAttendeeAsync(passId);
+            if (pass == null) return false;
+
+            // Update attendee personal details
+            pass.Attendee.FullName = dto.FullName;
+            pass.Attendee.PhoneNumber = dto.PhoneNumber;
+
+            // Update ticket status (e.g., Organizer revoking a ticket manually)
+            pass.Status = dto.Status;
+            pass.LastStatusUpdatedAt = DateTime.UtcNow;
+
+            return await _passRepository.SaveChangesAsync();
+        }
+
+        public async Task<bool> DeleteGuestFromEventAsync(Guid passId)
+        {
+            var pass = await _passRepository.GetByIdWithAttendeeAsync(passId);
+            if (pass == null) return false;
+
+            // Log a system note or handle logic before deleting if needed
+            _passRepository.DeletePass(pass);
+
+            return await _passRepository.SaveChangesAsync();
+        }
 
         public async Task<RegistrationResponseDto> ProcessRsvpAsync(Guid eventId, RsvpRequestDto request)
         {
@@ -44,7 +70,7 @@ namespace ConclaseProject.Services
             var attendee = await _passRepository.GetAttendeeByEmailAsync(request.Email);
             if (attendee == null)
             {
-                attendee = new Attendees
+                attendee = new Attendee
                 {
                     FullName = request.FullName,
                     Email = request.Email.ToLower().Trim(),

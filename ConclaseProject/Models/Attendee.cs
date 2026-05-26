@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-public class Attendees
+public class Attendee
 {
+    [Key]
+    
     public Guid Id { get; set; } = Guid.NewGuid();
 
     public string FullName { get; set; } = string.Empty;

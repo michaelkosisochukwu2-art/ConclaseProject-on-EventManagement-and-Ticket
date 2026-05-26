@@ -24,7 +24,7 @@ public class EventPass
 
     public Event Event { get; set; } = null!;
 
-    public Attendees Attendee { get; set; } = null!;
+    public Attendee Attendee { get; set; } = null!;
 
     public ICollection<VerificationLog> VerificationLogs { get; set; } = new List<VerificationLog>();
 }

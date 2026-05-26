@@ -11,16 +11,17 @@ namespace ConclaseProject.Data
         }
 
         public DbSet<Event> Events => Set<Event>();
-        public DbSet<Attendees> Attendees => Set<Attendees>();
+        public DbSet<Attendee> Attendees => Set<Attendee>();
         public DbSet<EventPass> EventPasses => Set<EventPass>();
         public DbSet<VerificationLog> VerificationLogs => Set<VerificationLog>();
+        public DbSet<User>Users => Set<User>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             // Attendee Constraints
-            modelBuilder.Entity<Attendees>()
+            modelBuilder.Entity<Attendee>()
                 .HasIndex(a => a.Email)
                 .IsUnique(); // Ensure unique emails globally
 
@@ -57,6 +58,10 @@ namespace ConclaseProject.Data
                 .WithMany(ep => ep.VerificationLogs)
                 .HasForeignKey(vl => vl.EventPassId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
         }
     }
 }

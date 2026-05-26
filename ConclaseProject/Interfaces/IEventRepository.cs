@@ -14,5 +14,6 @@ namespace ConclaseProject.Interfaces
         Task AddAsync(Event @event);
 
         Task<bool> SaveChangesAsync();
+       
     }
 }

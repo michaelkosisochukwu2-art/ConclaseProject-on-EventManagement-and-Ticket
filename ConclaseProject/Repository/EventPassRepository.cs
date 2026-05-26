@@ -16,6 +16,21 @@ namespace ConclaseProject.Repositories
         {
             _context = context;
         }
+        public async Task<EventPass?> GetByIdWithAttendeeAsync(Guid passId)
+        {
+            return await _context.EventPasses
+                .Include(ep => ep.Attendee)
+                .Include(ep => ep.Event)
+                .FirstOrDefaultAsync(ep => ep.Id == passId);
+        }
+
+        public void DeletePass(EventPass pass)
+        {
+            // This safely removes the ticket/pass allocation.
+            // If the attendee has NO other tickets, you could optionally delete the attendee too,
+            // but usually, removing the EventPass is what "deletes them from the guest list".
+            _context.EventPasses.Remove(pass);
+        }
 
         public async Task<EventPass?> GetByTokenWithDetailsAsync(string token)
         {
@@ -31,13 +46,13 @@ namespace ConclaseProject.Repositories
                 .AnyAsync(ep => ep.EventId == eventId && ep.Attendee.Email.ToLower() == email.ToLower());
         }
 
-        public async Task<Attendees?> GetAttendeeByEmailAsync(string email)
+        public async Task<Attendee?> GetAttendeeByEmailAsync(string email)
         {
             return await _context.Attendees
                 .FirstOrDefaultAsync(a => a.Email.ToLower() == email.ToLower());
         }
 
-        public async Task AddAttendeeAsync(Attendees attendee)
+        public async Task AddAttendeeAsync(Attendee attendee)
         {
             await _context.Attendees.AddAsync(attendee);
         }
